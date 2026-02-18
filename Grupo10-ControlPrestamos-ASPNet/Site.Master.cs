@@ -11,7 +11,10 @@ namespace Grupo10_ControlPrestamos_ASPNet
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["Usuario"] != null)
+            {
+                lblUsuario.Text = "Usuario logueado: " + Session["Usuario"].ToString();
+            }
         }
     }
 }

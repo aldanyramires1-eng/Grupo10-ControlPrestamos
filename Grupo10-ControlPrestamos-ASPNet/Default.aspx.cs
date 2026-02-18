@@ -13,5 +13,18 @@ namespace Grupo10_ControlPrestamos_ASPNet
         {
 
         }
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            if (txtUsuario.Text == "admin" && txtPassword.Text == "123")
+            {
+                Session["Usuario"] = txtUsuario.Text;
+                Response.Redirect("Equipos.aspx");
+            }
+            else
+            {
+                lblMensaje.Text = "Credenciales incorrectas.";
+            }
+        }
+
     }
 }
