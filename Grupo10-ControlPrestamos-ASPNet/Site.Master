@@ -5,32 +5,101 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Sistema de Control de Préstamos</title>
+    <title><%: Page.Title %> - Sistema de Control</title>
 
-    <!-- ContentPlaceHolder para el HEAD -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Encabezado principal */
+        .header-banner {
+            background-color: #ffffff;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .header-banner h2 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 24px;
+        }
+
+        /* Estilo del Menú (Inspirado en el encabezado verde de tu tabla) */
+        .nav-container {
+            background-color: #1b5e20; /* Verde oscuro como el de la tabla */
+            padding: 0 10%;
+        }
+
+        .main-menu {
+            font-weight: 500;
+        }
+
+        /* Personalización de los ítems del menú ASP.NET */
+        .main-menu a {
+            color: white !important;
+            padding: 15px 20px !important;
+            display: inline-block;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .main-menu a:hover {
+            background-color: #2e7d32;
+            color: #ffffff !important;
+        }
+
+        /* Info del usuario */
+        .user-status {
+            padding: 10px 10%;
+            background: #fff;
+            font-size: 0.9em;
+            text-align: right;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Contenedor de contenido */
+        .main-content {
+            background-color: #ffffff;
+            margin: 30px 10%;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            min-height: 400px;
+        }
+    </style>
+
     <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
 </head>
 
 <body>
     <form runat="server">
 
-        <h2>Sistema Web de Control de Préstamos de Equipos</h2>
-        <hr />
-        <asp:Label ID="lblUsuario" runat="server" ForeColor="Blue" />
+        <div class="header-banner">
+            <h2>Sistema Web de Control de Préstamos</h2>
+            <asp:Label ID="lblUsuario" runat="server" ForeColor="Blue" />
+        </div>
 
-        <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal">
-            <Items>
-                <asp:MenuItem Text="Login" NavigateUrl="~/Default.aspx" />
-                <asp:MenuItem Text="Equipos" NavigateUrl="~/Equipos.aspx" />
-                <asp:MenuItem Text="Nuevo Préstamo" NavigateUrl="~/PrestamoNuevo.aspx" />
-                <asp:MenuItem Text="Historial" NavigateUrl="~/Historial.aspx" />
-            </Items>
-        </asp:Menu>
+        <div class="nav-container">
+            <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal" CssClass="main-menu" StaticMenuStyle-CssClass="main-menu">
+                <Items>
+                    <asp:MenuItem Text="Login" NavigateUrl="~/Default.aspx" />
+                    <asp:MenuItem Text="Equipos" NavigateUrl="~/Equipos.aspx" />
+                    <asp:MenuItem Text="Nuevo Préstamo" NavigateUrl="~/PrestamoNuevo.aspx" />
+                    <asp:MenuItem Text="Historial" NavigateUrl="~/Historial.aspx" />
+                </Items>
+            </asp:Menu>
+        </div>
 
-        <hr />
 
-        <!-- ContentPlaceHolder principal -->
-        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        <div class="main-content">
+            <!-- ContentPlaceHolder principal -->
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </div>
 
     </form>
 </body>
