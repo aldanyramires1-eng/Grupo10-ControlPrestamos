@@ -1,53 +1,50 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Historial.aspx.cs" Inherits="Grupo10_ControlPrestamos_ASPNet.Historial" %>
 
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Historial de Préstamos</title>
+    <title>Préstamos Activos</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .filtros { margin-bottom: 20px; padding: 15px; background-color: #f4f4f4; border-radius: 8px; }
-        .boton { padding: 5px 15px; background-color: #007bff; color: white; border: none; cursor: pointer; }
-        .boton:hover { background-color: #0056b3; }
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .contenedor { background: white; padding: 24px; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+        .tabla { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .tabla th, .tabla td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .tabla th { background-color: #1e6e5e; color: white; }
+        .controles { margin-bottom: 15px; }
+        .controles input, .controles select, .controles button { padding: 6px; margin-right: 10px; }
+        .btnNuevo { background: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block; float: right; }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <h2>Historial de Préstamos</h2>
-
-            <div class="filtros">
-                <asp:Label ID="lblBuscar" runat="server" Text="Buscar Carnet o Estudiante: " Font-Bold="true"></asp:Label>
-                <asp:TextBox ID="txtBuscar" runat="server" Width="200px" Placeholder="Ej. SM1001 o Juan" OnTextChanged="txtBuscar_TextChanged"></asp:TextBox>
-                <asp:Button ID="btnBuscar" runat="server" Text=" Buscar" CssClass="boton" OnClick="btnBuscar_Click" />
+        <div class="contenedor">
+            <a class="btnNuevo" href="PrestamoNuevo.aspx">+ Nuevo Préstamo</a>
+            <h2>Control de Préstamos</h2>
+            
+            <div class="controles">
+                <label>Buscar Cliente:</label>
+                <asp:TextBox ID="txtBuscarCliente" runat="server" placeholder="Ej. Carlos..."></asp:TextBox>
+                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" OnClick="btnBuscar_Click" />
                 
-                &nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="lblFiltro" runat="server" Text="Filtrar por Estado: " Font-Bold="true"></asp:Label>
+                <label>Filtrar por Estado: </label>
                 <asp:DropDownList ID="ddlFiltroEstado" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlFiltroEstado_SelectedIndexChanged">
-                    <asp:ListItem Text="Todos" Value="Todos"></asp:ListItem>
-                    <asp:ListItem Text="A tiempo" Value="A tiempo"></asp:ListItem>
-                    <asp:ListItem Text="Atrasados" Value="Atrasados"></asp:ListItem>
+                    <asp:ListItem Text="Todos" Value="Todos" />
+                    <asp:ListItem Text="Prestado" Value="Prestado" />
+                    <asp:ListItem Text="Atrasado" Value="Atrasado" />
+                    <asp:ListItem Text="Devuelto" Value="Devuelto" />
                 </asp:DropDownList>
             </div>
 
-            <hr />
-
-            <asp:GridView ID="gvHistorial" runat="server" AutoGenerateColumns="False" CellPadding="10" ForeColor="#333333" GridLines="None" Width="100%">
-                <AlternatingRowStyle BackColor="White" />
+            <asp:GridView ID="gvHistorial" runat="server" AutoGenerateColumns="False" CssClass="tabla">
                 <Columns>
-                    <asp:BoundField DataField="Carnet" HeaderText="Carnet" />
-                    <asp:BoundField DataField="Estudiante" HeaderText="Nombre del Estudiante" />
-                    <asp:BoundField DataField="Articulo" HeaderText="Libro/Equipo" />
-                    <asp:BoundField DataField="FechaEsperada" HeaderText="Fecha Esperada" DataFormatString="{0:dd/MM/yyyy}" />
+                    <asp:BoundField DataField="IdPrestamo" HeaderText="ID" />
+                    <asp:BoundField DataField="NombreCliente" HeaderText="Cliente" />
+                    <asp:BoundField DataField="Articulo" HeaderText="Artículo" />
+                    <asp:BoundField DataField="FechaPrestamo" HeaderText="F. Préstamo" DataFormatString="{0:dd/MM/yyyy}" />
+                    <asp:BoundField DataField="FechaDevolucionEsperada" HeaderText="F. Dev. Esperada" DataFormatString="{0:dd/MM/yyyy}" />
                     <asp:BoundField DataField="Estado" HeaderText="Estado" />
                 </Columns>
-                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <RowStyle BackColor="#E3EAEB" />
             </asp:GridView>
-
-            <br />
-            <asp:Label ID="lblMensaje" runat="server" ForeColor="Red" Font-Bold="true"></asp:Label>
-
         </div>
     </form>
 </body>

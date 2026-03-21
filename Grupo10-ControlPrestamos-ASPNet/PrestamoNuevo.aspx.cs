@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Grupo10_ControlPrestamos_ASPNet
 {
@@ -13,13 +10,11 @@ namespace Grupo10_ControlPrestamos_ASPNet
         {
             if (!IsPostBack)
             {
-                // Fijar atributo min del input date al día siguiente
-                txtFecha.Attributes["min"] = DateTime.Today.AddDays(1).ToString("yyyy-MM-dd");
+                txtFechaDevolucion.Attributes["min"] = DateTime.Today.AddDays(1).ToString("yyyy-MM-dd");
             }
         }
 
-        // ── CustomValidator: la fecha debe ser estrictamente mayor a hoy ──
-        protected void cvFecha_ServerValidate(object source, ServerValidateEventArgs args)
+        protected void cvFecha_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
         {
             DateTime fecha;
             if (DateTime.TryParse(args.Value, out fecha))
@@ -32,29 +27,55 @@ namespace Grupo10_ControlPrestamos_ASPNet
         {
             if (!Page.IsValid) return;
 
-            string carnet = txtCarnet.Text.Trim();
-            string nombre = txtNombre.Text.Trim();
-            string equipo = ddlEquipo.SelectedItem.Text;
-            string fecha = Convert.ToDateTime(txtFecha.Text).ToString("dd/MM/yyyy");
-            string estado = ddlEstado.SelectedItem.Text;
+            string nombreCliente = txtNombreCliente.Text.Trim();
+            string articulo = ddlArticulo.SelectedItem.Text;
+            DateTime fechaPrestamo = DateTime.Today;
+            DateTime fechaDevolucion = Convert.ToDateTime(txtFechaDevolucion.Text);
+            string estado = ddlEstado.SelectedValue;
 
-            Session["NuevoPrestamo"] = true;
 
-            pnlExito.Visible = true;
-            lblExito.Text =
-                "<strong>✔ Préstamo registrado exitosamente</strong><br/>" +
-                "Carnet: " + carnet + " | " +
-                "Estudiante: " + nombre + "<br/>" +
-                "Equipo: " + equipo + " | " +
-                "Devolución: " + fecha + " | " +
-                "Estado: " + estado;
+            string cadenaConexion = ConfigurationManager.ConnectionStrings["ConexionBD1"].ConnectionString;
 
-            // Limpiar campos
-            txtCarnet.Text = "";
-            txtNombre.Text = "";
-            ddlEquipo.SelectedIndex = 0;
-            txtFecha.Text = "";
-            ddlEstado.SelectedIndex = 0;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cadenaConexion))
+                {
+       
+                    string query = "INSERT INTO Prestamos (NombreCliente, Articulo, FechaPrestamo, FechaDevolucionEsperada, Estado) VALUES (@Nombre, @Articulo, @FechaP, @FechaD, @Estado)";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+
+                        cmd.Parameters.AddWithValue("@Nombre", nombreCliente);
+                        cmd.Parameters.AddWithValue("@Articulo", articulo);
+                        cmd.Parameters.AddWithValue("@FechaP", fechaPrestamo);
+                        cmd.Parameters.AddWithValue("@FechaD", fechaDevolucion);
+                        cmd.Parameters.AddWithValue("@Estado", estado);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery(); 
+                        con.Close();
+                    }
+                }
+
+
+                pnlExito.Visible = true;
+                lblExito.Text = "<strong>✔ Préstamo guardado exitosamente en la base de datos.</strong>";
+                lblExito.ForeColor = System.Drawing.Color.Green;
+
+
+                txtNombreCliente.Text = "";
+                ddlArticulo.SelectedIndex = 0;
+                txtFechaDevolucion.Text = "";
+                ddlEstado.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+
+                pnlExito.Visible = true;
+                lblExito.Text = "<strong>❌ Error al guardar:</strong> " + ex.Message;
+                lblExito.ForeColor = System.Drawing.Color.Red;
+            }
         }
     }
 }

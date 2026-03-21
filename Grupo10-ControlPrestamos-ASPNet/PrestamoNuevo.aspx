@@ -34,82 +34,48 @@
                 <asp:Label ID="lblExito" runat="server" />
             </asp:Panel>
 
-            <asp:ValidationSummary ID="vsErrores" runat="server"
-                CssClass="vs"
-                HeaderText="Se encontraron los siguientes errores:"
-                ShowMessageBox="false"
-                ShowSummary="true"
-                DisplayMode="List" />
+            <asp:ValidationSummary ID="vsErrores" runat="server" CssClass="vs" HeaderText="Se encontraron los siguientes errores:" ShowMessageBox="false" ShowSummary="true" DisplayMode="List" />
 
-            <!-- Carnet -->
             <div class="campo">
-                <label>Carnet del Estudiante:</label>
-                <asp:TextBox ID="txtCarnet" runat="server" placeholder="Ej. JP1001" />
-                <asp:RequiredFieldValidator runat="server"
-                    ControlToValidate="txtCarnet"
-                    ErrorMessage="El carnet es obligatorio."
-                    CssClass="error" Display="Dynamic" Text="* El carnet es obligatorio." />
+                <label>Nombre del Cliente:</label>
+                <asp:TextBox ID="txtNombreCliente" runat="server" placeholder="Nombre completo" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtNombreCliente" ErrorMessage="El nombre del cliente es obligatorio." CssClass="error" Display="Dynamic" Text="* El nombre es obligatorio." />
             </div>
 
-            <!-- Nombre -->
             <div class="campo">
-                <label>Nombre del Estudiante:</label>
-                <asp:TextBox ID="txtNombre" runat="server" placeholder="Nombre completo" />
-                <asp:RequiredFieldValidator runat="server"
-                    ControlToValidate="txtNombre"
-                    ErrorMessage="El nombre es obligatorio."
-                    CssClass="error" Display="Dynamic" Text="* El nombre es obligatorio." />
-            </div>
-
-            <!-- Equipo -->
-            <div class="campo">
-                <label>Libro / Equipo:</label>
-                <asp:DropDownList ID="ddlEquipo" runat="server">
+                <label>Artículo / Equipo:</label>
+                <asp:DropDownList ID="ddlArticulo" runat="server">
                     <asp:ListItem Text="Seleccione…" Value="" />
                     <asp:ListItem Text="Teclado Sintetizador" Value="Teclado Sintetizador" />
-                    <asp:ListItem Text="Proyector EPSON"      Value="Proyector EPSON" />
+                    <asp:ListItem Text="Proyector Epson"      Value="Proyector Epson" />
                     <asp:ListItem Text="Libro de C#"          Value="Libro de C#" />
                     <asp:ListItem Text="Cable HDMI"           Value="Cable HDMI" />
                     <asp:ListItem Text="Laptop Dell"          Value="Laptop Dell" />
                     <asp:ListItem Text="Tablet Samsung"       Value="Tablet Samsung" />
                 </asp:DropDownList>
-                <asp:RequiredFieldValidator runat="server"
-                    ControlToValidate="ddlEquipo"
-                    InitialValue=""
-                    ErrorMessage="Debe seleccionar un equipo o libro."
-                    CssClass="error" Display="Dynamic" Text="* Debe seleccionar un equipo o libro." />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="ddlArticulo" InitialValue="" ErrorMessage="Debe seleccionar un artículo." CssClass="error" Display="Dynamic" Text="* Debe seleccionar un artículo." />
             </div>
 
-            <!-- Fecha -->
             <div class="campo">
                 <label>Fecha Esperada de Devolución:</label>
-                <asp:TextBox ID="txtFecha" runat="server" TextMode="Date" />
-                <asp:RequiredFieldValidator runat="server"
-                    ControlToValidate="txtFecha"
-                    ErrorMessage="La fecha de devolución es obligatoria."
-                    CssClass="error" Display="Dynamic" Text="* La fecha es obligatoria." />
-                <asp:CustomValidator ID="cvFecha" runat="server"
-                    ControlToValidate="txtFecha"
-                    OnServerValidate="cvFecha_ServerValidate"
-                    ErrorMessage="La fecha debe ser posterior a hoy."
-                    CssClass="error" Display="Dynamic" Text="* La fecha debe ser posterior a hoy." />
+                <asp:TextBox ID="txtFechaDevolucion" runat="server" TextMode="Date" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtFechaDevolucion" ErrorMessage="La fecha de devolución es obligatoria." CssClass="error" Display="Dynamic" Text="* La fecha es obligatoria." />
+                <asp:CustomValidator ID="cvFecha" runat="server" ControlToValidate="txtFechaDevolucion" OnServerValidate="cvFecha_ServerValidate" ErrorMessage="La fecha debe ser posterior a hoy." CssClass="error" Display="Dynamic" Text="* La fecha debe ser posterior a hoy." />
             </div>
 
-            <!-- Estado -->
             <div class="campo">
-                <label>Estado:</label>
+                <label>Estado Inicial:</label>
                 <asp:DropDownList ID="ddlEstado" runat="server">
-                    <asp:ListItem Text="A tiempo"  Value="A tiempo" />
-                    <asp:ListItem Text="Atrasados" Value="Atrasados" />
+                    <asp:ListItem Text="Prestado"  Value="Prestado" />
+                    <asp:ListItem Text="Devuelto"  Value="Devuelto" />
+                    <asp:ListItem Text="Atrasado"  Value="Atrasado" />
                 </asp:DropDownList>
             </div>
 
-            <asp:Button ID="btnGuardar" runat="server" Text="Guardar Préstamo"
-                CssClass="btnGuardar" OnClick="btnGuardar_Click" />
-            <a href="Equipos.aspx" class="btnVolver">← Volver</a>
+            <asp:Button ID="btnGuardar" runat="server" Text="Guardar Préstamo" CssClass="btnGuardar" OnClick="btnGuardar_Click" />
+            <a href="Historial.aspx" class="btnVolver">← Ver Historial</a>
 
         </div>
     </form>
 </body>
 </html>
-
