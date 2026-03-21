@@ -27,21 +27,11 @@
     <form id="form1" runat="server">
         <h2>Equipos</h2>
 
-        <a class="btnNuevo" href="EquipoNuevo.aspx">+ Nuevo Equipo</a>
-
         <div class="filtros">
             <label>Buscar Carnet o Estudiante:</label>
             <asp:TextBox ID="txtBuscar" runat="server" placeholder="Ej. SM1001 o Juan" />
             <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btnBuscar"
                 OnClick="btnBuscar_Click" />
-            &nbsp;&nbsp;
-            <label>Filtrar por Estado:</label>
-            <asp:DropDownList ID="ddlEstado" runat="server" AutoPostBack="true"
-                OnSelectedIndexChanged="ddlEstado_SelectedIndexChanged">
-                <asp:ListItem Text="Todos" Value="Todos" />
-                <asp:ListItem Text="A tiempo" Value="A tiempo" />
-                <asp:ListItem Text="Atrasados" Value="Atrasados" />
-            </asp:DropDownList>
         </div>
 
         <asp:GridView ID="gvPrestamos" runat="server"
@@ -49,18 +39,11 @@
             EmptyDataText="No se encontraron préstamos."
             Width="100%">
             <Columns>
-                <asp:BoundField DataField="Carnet"    HeaderText="Carnet" />
-                <asp:BoundField DataField="Nombre"    HeaderText="Nombre del Estudiante" />
-                <asp:BoundField DataField="Equipo"    HeaderText="Libro/Equipo" />
-                <asp:BoundField DataField="FechaEsperada" HeaderText="Fecha Esperada"
+                <asp:BoundField DataField="IdPrestamo"    HeaderText="Codigo del Prestamo" />
+                <asp:BoundField DataField="NombreCliente"    HeaderText="Nombre del Estudiante" />
+                <asp:BoundField DataField="Articulo"    HeaderText="Equipo" />
+                <asp:BoundField DataField="FechaPrestamo" HeaderText="Fecha Esperada"
                     DataFormatString="{0:dd/MM/yyyy}" />
-                <asp:TemplateField HeaderText="Estado">
-                    <ItemTemplate>
-                        <asp:Label runat="server"
-                            Text='<%# Eval("Estado") %>'
-                            CssClass='<%# Eval("Estado").ToString() == "A tiempo" ? "estado-tiempo" : "estado-atrasado" %>' />
-                    </ItemTemplate>
-                </asp:TemplateField>
             </Columns>
         </asp:GridView>
     </form>
