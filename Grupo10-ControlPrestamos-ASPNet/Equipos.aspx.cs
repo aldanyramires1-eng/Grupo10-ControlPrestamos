@@ -54,7 +54,7 @@ namespace Grupo10_ControlPrestamos_ASPNet
             DataTable dt = new DataTable();
 
 
-            string cadenaConexion = ConfigurationManager.ConnectionStrings["ConexionBD1"].ConnectionString;
+            string cadenaConexion = ConfigurationManager.ConnectionStrings["ConexionBD2"].ConnectionString;
 
             using (SqlConnection con = new SqlConnection(cadenaConexion))
             {
