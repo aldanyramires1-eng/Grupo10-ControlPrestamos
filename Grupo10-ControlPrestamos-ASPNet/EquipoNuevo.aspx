@@ -1,9 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EquipoNuevo.aspx.cs" Inherits="Grupo10_ControlPrestamos_ASPNet.EquipoNuevo" %>
+﻿<%@ Page Title="Agregar Equipo" MasterPageFile="~/Site.Master" Language="C#" AutoEventWireup="true" CodeBehind="EquipoNuevo.aspx.cs" Inherits="Grupo10_ControlPrestamos_ASPNet.EquipoNuevo" %>
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Agregar Equipo</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
         h2 { color: #222; }
@@ -24,9 +21,8 @@
         .vs { background: #fff0f0; border: 1px solid #cc0000; padding: 10px 14px; border-radius: 4px; margin-bottom: 14px; color: #cc0000; }
         .vs ul { margin: 4px 0 0 16px; padding: 0; }
     </style>
-</head>
-<body>
-    <form id="form1" runat="server">
+</asp:Content>
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
         <h2>Agregar Nuevo Equipo</h2>
 
         <div class="contenedor">
@@ -123,7 +119,5 @@
             <a href="Equipos.aspx" class="btnVolver">← Volver</a>
 
         </div>
-    </form>
-</body>
-</html>
+  </asp:Content>
 
