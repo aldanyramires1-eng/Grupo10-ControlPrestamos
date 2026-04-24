@@ -1,0 +1,59 @@
+@model Grupo10_ControlPrestamos_ASPNet.Models.EquipoIndexViewModel
+
+@{
+    ViewBag.Title = "Equipos";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 mb-1">Equipos prestados</h1>
+        <p class="text-muted mb-0">Historial de prestamos provenientes de la base de datos secundaria.</p>
+    </div>
+    @Html.ActionLink("Nuevo prestamo", "Create", null, new { @class = "btn btn-success" })
+</div>
+
+@using (Html.BeginForm("Equipos", "Prestamos", FormMethod.Get, new { @class = "row g-3 mb-4" }))
+{
+    <div class="col-md-9">
+        <label class="form-label" for="buscarCliente">Buscar carnet o estudiante</label>
+        <input class="form-control" id="buscarCliente" name="buscarCliente" value="@Model.BuscarCliente" placeholder="Ej. SM1001 o Juan" />
+    </div>
+    <div class="col-md-3 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+    </div>
+}
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-striped mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th>Codigo del prestamo</th>
+                    <th>Nombre del estudiante</th>
+                    <th>Equipo</th>
+                    <th>Fecha esperada</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Historial.Count == 0)
+                {
+                    <tr>
+                        <td colspan="4" class="text-center py-4 text-muted">No se encontraron prestamos.</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model.Historial)
+                    {
+                        <tr>
+                            <td>@item.IdPrestamo</td>
+                            <td>@item.NombreCliente</td>
+                            <td>@item.Articulo</td>
+                            <td>@item.FechaPrestamo.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+@model Grupo10_ControlPrestamos_ASPNet.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Inicio de sesion";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h1 class="h3 mb-3">Inicio de sesion</h1>
+                <p class="text-muted">Ingresa con el usuario de prueba actual para acceder al sistema.</p>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.Usuario, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Usuario, new { @class = "form-control", placeholder = "Ej. admin" })
+                        @Html.ValidationMessageFor(m => m.Usuario, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Ingresa tu contrasena" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">Ingresar</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,7 +11,8 @@ namespace Grupo10_ControlPrestamos_ASPNet
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/Account/Login", endResponse: false);
+            Context.ApplicationInstance.CompleteRequest();
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {

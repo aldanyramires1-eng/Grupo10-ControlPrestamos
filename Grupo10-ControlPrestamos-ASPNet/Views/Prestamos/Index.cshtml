@@ -1,0 +1,81 @@
+@model Grupo10_ControlPrestamos_ASPNet.Models.PrestamoIndexViewModel
+
+@{
+    ViewBag.Title = "Prestamos";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 mb-1">Control de Prestamos</h1>
+        <p class="text-muted mb-0">Consulta y filtra los prestamos registrados.</p>
+    </div>
+    @Html.ActionLink("Nuevo prestamo", "Create", null, new { @class = "btn btn-success" })
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@using (Html.BeginForm("Index", "Prestamos", FormMethod.Get, new { @class = "row g-3 mb-4" }))
+{
+    <div class="col-md-5">
+        <label class="form-label" for="buscarCliente">Buscar cliente</label>
+        <input class="form-control" id="buscarCliente" name="buscarCliente" value="@Model.BuscarCliente" placeholder="Ej. Carlos" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label" for="estado">Filtrar por estado</label>
+        <select class="form-select" id="estado" name="estado">
+            <option value="">Todos</option>
+            <option value="Prestado" @(Model.Estado == "Prestado" ? "selected" : null)>Prestado</option>
+            <option value="Atrasado" @(Model.Estado == "Atrasado" ? "selected" : null)>Atrasado</option>
+            <option value="Devuelto" @(Model.Estado == "Devuelto" ? "selected" : null)>Devuelto</option>
+        </select>
+    </div>
+    <div class="col-md-3 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+    </div>
+}
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-striped mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Articulo</th>
+                    <th>Fecha de prestamo</th>
+                    <th>Fecha de devolucion</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Prestamos.Count == 0)
+                {
+                    <tr>
+                        <td colspan="6" class="text-center py-4 text-muted">No se encontraron prestamos.</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var prestamo in Model.Prestamos)
+                    {
+                        <tr>
+                            <td>@prestamo.IdPrestamo</td>
+                            <td>@prestamo.NombreCliente</td>
+                            <td>@prestamo.Articulo</td>
+                            <td>@prestamo.FechaPrestamo.ToString("dd/MM/yyyy")</td>
+                            <td>@prestamo.FechaDevolucionEsperada.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                <span class="badge @(prestamo.Estado == "Atrasado" ? "text-bg-danger" : prestamo.Estado == "Devuelto" ? "text-bg-secondary" : "text-bg-success")">
+                                    @prestamo.Estado
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

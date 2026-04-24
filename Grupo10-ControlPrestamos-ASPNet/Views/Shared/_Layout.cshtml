@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Control de Prestamos</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("Control de Prestamos", "Index", "Prestamos", null, new { @class = "navbar-brand" })
+            <div class="navbar-nav ms-auto">
+                @if (Session["Usuario"] != null)
+                {
+                    @Html.ActionLink("Prestamos", "Index", "Prestamos", null, new { @class = "nav-link" })
+                    @Html.ActionLink("Equipos", "Equipos", "Prestamos", null, new { @class = "nav-link" })
+                    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { @class = "d-inline" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-link nav-link">Salir</button>
+                    }
+                }
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4">
+        @RenderBody()
+    </main>
+
+    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
