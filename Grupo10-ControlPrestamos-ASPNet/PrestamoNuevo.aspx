@@ -1,9 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PrestamoNuevo.aspx.cs" Inherits="Grupo10_ControlPrestamos_ASPNet.PrestamoNuevo" %>
+﻿<%@ Page Title="Registrar nuevo préstamo" MasterPageFile="~/Site.Master" Language="C#" AutoEventWireup="true" CodeBehind="PrestamoNuevo.aspx.cs" Inherits="Grupo10_ControlPrestamos_ASPNet.PrestamoNuevo" %>
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Registrar Nuevo Préstamo</title>
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
         h2 { color: #222; }
@@ -23,9 +20,8 @@
         .vs { background: #fff0f0; border: 1px solid #cc0000; padding: 10px 14px; border-radius: 4px; margin-bottom: 14px; color: #cc0000; }
         .vs ul { margin: 4px 0 0 16px; padding: 0; }
     </style>
-</head>
-<body>
-    <form id="form1" runat="server">
+</asp:Content>
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
         <h2>Registrar Nuevo Préstamo</h2>
 
         <div class="contenedor">
@@ -76,6 +72,4 @@
             <a href="Historial.aspx" class="btnVolver">← Ver Historial</a>
 
         </div>
-    </form>
-</body>
-</html>
+  </asp:Content>

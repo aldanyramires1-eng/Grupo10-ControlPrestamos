@@ -1,9 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Historial.aspx.cs" Inherits="Grupo10_ControlPrestamos_ASPNet.Historial" %>
+﻿<%@ Page Title="Historial" MasterPageFile="~/Site.Master" Language="C#" AutoEventWireup="true" CodeBehind="Historial.aspx.cs" Inherits="Grupo10_ControlPrestamos_ASPNet.Historial" %>
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Préstamos Activos</title>
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
         .contenedor { background: white; padding: 24px; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
@@ -14,9 +11,8 @@
         .controles input, .controles select, .controles button { padding: 6px; margin-right: 10px; }
         .btnNuevo { background: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block; float: right; }
     </style>
-</head>
-<body>
-    <form id="form1" runat="server">
+</asp:Content>
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
         <div class="contenedor">
             <a class="btnNuevo" href="PrestamoNuevo.aspx">+ Nuevo Préstamo</a>
             <h2>Control de Préstamos</h2>
@@ -46,6 +42,4 @@
                 </Columns>
             </asp:GridView>
         </div>
-    </form>
-</body>
-</html>
+   </asp:Content>

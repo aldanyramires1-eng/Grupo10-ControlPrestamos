@@ -1,9 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Equipos.aspx.cs" Inherits="Grupo10_ControlPrestamos_ASPNet.Equipos" %>
-
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Equipos</title>
+﻿<%@ Page Title="Equipos" MasterPageFile="~/Site.Master" Language="C#" AutoEventWireup="true" CodeBehind="Equipos.aspx.cs" Inherits="Grupo10_ControlPrestamos_ASPNet.Equipos" %>
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
         h2 { color: #222; }
@@ -22,9 +18,8 @@
         .estado-tiempo { color: #1a7a1a; font-weight: bold; }
         .estado-atrasado { color: #cc0000; font-weight: bold; }
     </style>
-</head>
-<body>
-    <form id="form1" runat="server">
+    </asp:Content>
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
         <h2>Equipos</h2>
 
         <div class="filtros">
@@ -46,7 +41,4 @@
                     DataFormatString="{0:dd/MM/yyyy}" />
             </Columns>
         </asp:GridView>
-    </form>
-</body>
-</html>
-
+  </asp:Content>

@@ -89,6 +89,7 @@
                 <Items>
                     <asp:MenuItem Text="Login" NavigateUrl="~/Default.aspx" />
                     <asp:MenuItem Text="Equipos" NavigateUrl="~/Equipos.aspx" />
+                    <asp:MenuItem Text="Nuevo Equipo" NavigateUrl="~/EquipoNuevo.aspx" />
                     <asp:MenuItem Text="Nuevo Préstamo" NavigateUrl="~/PrestamoNuevo.aspx" />
                     <asp:MenuItem Text="Historial" NavigateUrl="~/Historial.aspx" />
                 </Items>
