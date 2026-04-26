@@ -23,6 +23,8 @@ namespace Grupo10_ControlPrestamos_ASPNet.Models
             "Atrasado"
         };
 
+        public int IdPrestamo { get; set; }
+
         [Required(ErrorMessage = "El nombre del cliente es absolutamente obligatorio.")]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "El nombre debe tener entre 3 y 100 caracteres.")]
         [RegularExpression(@"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$", ErrorMessage = "El nombre solo puede contener letras y espacios.")]

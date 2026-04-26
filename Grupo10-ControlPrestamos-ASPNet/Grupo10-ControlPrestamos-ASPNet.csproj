@@ -301,6 +301,9 @@
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
     <Content Include="Site.Mobile.Master" />
+    <Content Include="Views\Prestamos\CreateEquipos.cshtml" />
+    <Content Include="Views\Prestamos\EditPrestamos.cshtml" />
+    <Content Include="Views\Prestamos\EditHistorialPrestamos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

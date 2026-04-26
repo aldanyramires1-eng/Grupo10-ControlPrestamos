@@ -1,0 +1,61 @@
+﻿@model Grupo10_ControlPrestamos_ASPNet.Models.HistorialPrestamo
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h2 class="mb-0">Editar historial prestamo</h2>
+            <p class="text-muted">Completa el formulario para guardar el prestamo en la base de datos.</p>
+        </div>
+        @Html.ActionLink("Ver historial", "Equipos", null, new { @class = "btn btn-outline-secondary" })
+    </div>
+
+    <div class="card shadow-sm p-4" style="border-radius: 15px;">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <!-- Nombre del Cliente -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">Nombre del cliente</label>
+                @Html.TextBoxFor(m => m.NombreCliente, new { @class = "form-control", placeholder = "Nombre completo" })
+                @Html.ValidationMessageFor(m => m.NombreCliente, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Articulo -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">Articulo / Equipo</label>
+                @Html.DropDownListFor(
+                         m => m.Articulo,
+                         new SelectList(Model.ArticulosDisponibles),
+                         "Seleccione un articulo",
+                         new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.Articulo, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Fecha Devolucion -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">Fecha esperada de devolucion</label>
+                @Html.TextBoxFor(m => m.FechaDevolucionEsperada, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(m => m.FechaDevolucionEsperada, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Estado Inicial -->
+            <div class="mb-4">
+                <label class="form-label fw-bold">Estado inicial</label>
+                @Html.DropDownListFor(m => m.EstadoFinal,
+                         new SelectList(new[] { "Prestado", "Disponible", "En mantenimiento" }),
+                         new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.EstadoFinal, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Botones -->
+            <div class="d-flex align-items-center">
+                <button type="submit" class="btn btn-success me-3 px-4" style="background-color: #198754;">
+                    Guardar prestamo
+                </button>
+                @Html.ActionLink("Cancelar", "Equipos", null, new { @class = "text-decoration-none" })
+            </div>
+        }
+    </div>
+</div>

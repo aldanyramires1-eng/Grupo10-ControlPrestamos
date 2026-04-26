@@ -48,6 +48,7 @@
                     <th>Fecha de prestamo</th>
                     <th>Fecha de devolucion</th>
                     <th>Estado</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -71,6 +72,18 @@
                                 <span class="badge @(prestamo.Estado == "Atrasado" ? "text-bg-danger" : prestamo.Estado == "Devuelto" ? "text-bg-secondary" : "text-bg-success")">
                                     @prestamo.Estado
                                 </span>
+                            </td>
+                            <td>
+                                <!-- Enlace Editar -->
+                                @Html.ActionLink("Editar", "EditPrestamos", "Prestamos", new { idPrestamo = prestamo.IdPrestamo }, new { @class = "btn btn-primary" })
+
+                                |
+
+                                <!-- Enlace Eliminar -->
+                                <a href="@Url.Action("DeletePrestamos", "Prestamos", new { idPrestamo = prestamo.IdPrestamo })"
+                                   class="btn btn-danger">
+                                    Eliminar
+                                </a>
                             </td>
                         </tr>
                     }

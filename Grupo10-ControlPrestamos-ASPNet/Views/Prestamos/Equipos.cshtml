@@ -9,8 +9,13 @@
         <h1 class="h3 mb-1">Equipos prestados</h1>
         <p class="text-muted mb-0">Historial de prestamos provenientes de la base de datos secundaria.</p>
     </div>
-    @Html.ActionLink("Nuevo prestamo", "Create", null, new { @class = "btn btn-success" })
+    @Html.ActionLink("Nuevo equipo", "CreateEquipos", null, new { @class = "btn btn-success" })
 </div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
 
 @using (Html.BeginForm("Equipos", "Prestamos", FormMethod.Get, new { @class = "row g-3 mb-4" }))
 {
@@ -31,7 +36,8 @@
                     <th>Codigo del prestamo</th>
                     <th>Nombre del estudiante</th>
                     <th>Equipo</th>
-                    <th>Fecha esperada</th>
+                    <th>Fecha esperada</th>     
+                    <th></th>     
                 </tr>
             </thead>
             <tbody>
@@ -50,6 +56,18 @@
                             <td>@item.NombreCliente</td>
                             <td>@item.Articulo</td>
                             <td>@item.FechaPrestamo.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                <!-- Enlace Editar -->
+                                @Html.ActionLink("Editar", "EditHistorialPrestamos", "Prestamos", new { IdHistorial = item.IdHistorial }, new { @class = "btn btn-primary" })
+
+                                |
+
+                                <!-- Enlace Eliminar -->
+                                <a href="@Url.Action("DeleteHistorialPrestamos", "Prestamos", new { IdHistorial = item.IdHistorial })"
+                                   class="btn btn-danger">
+                                    Eliminar
+                                </a>
+                            </td>
                         </tr>
                     }
                 }
