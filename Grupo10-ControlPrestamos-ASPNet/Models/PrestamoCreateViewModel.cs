@@ -23,25 +23,26 @@ namespace Grupo10_ControlPrestamos_ASPNet.Models
             "Atrasado"
         };
 
-        [Required(ErrorMessage = "El nombre del cliente es obligatorio.")]
+        [Required(ErrorMessage = "El nombre del cliente es absolutamente obligatorio.")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "El nombre debe tener entre 3 y 100 caracteres.")]
+        [RegularExpression(@"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$", ErrorMessage = "El nombre solo puede contener letras y espacios.")]
         [Display(Name = "Nombre del cliente")]
         public string NombreCliente { get; set; }
 
-        [Required(ErrorMessage = "Debe seleccionar un articulo.")]
-        [Display(Name = "Articulo / Equipo")]
+        [Required(ErrorMessage = "Debe seleccionar un artículo de la lista.")]
+        [Display(Name = "Artículo / Equipo")]
         public string Articulo { get; set; }
 
-        [Required(ErrorMessage = "La fecha de devolucion es obligatoria.")]
+        [Required(ErrorMessage = "La fecha de devolución es obligatoria.")]
         [DataType(DataType.Date)]
-        [Display(Name = "Fecha esperada de devolucion")]
+        [Display(Name = "Fecha esperada de devolución")]
         public DateTime FechaDevolucionEsperada { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El estado inicial no puede quedar vacío.")]
         [Display(Name = "Estado inicial")]
         public string Estado { get; set; }
 
         public IReadOnlyList<string> ArticulosDisponibles => articulos;
-
         public IReadOnlyList<string> EstadosDisponibles => estados;
     }
 }
